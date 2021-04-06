@@ -1,13 +1,3 @@
----
-title: "Bar Charts"
-author: "Dr. Chuck Zumbaugh"
-date: "Last updated: 02/18/2021"
-output: 
-  html_document:
-    keep_md: true
-    css: R_tutorial.css
----
-
 In this tutorial we will discuss how to make attractive and effective bar charts using R. Bar charts are a great way to visually show the results of your analysis if you are comparing the means of categorical variables. A bar chart makes it easy for folks who have never seen your data to quickly figure out which of your treatments are different. Before we begin, there are a couple of packages that you will need to install. The following code will install them when executed.
 
 ```r
