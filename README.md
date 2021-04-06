@@ -1,4 +1,4 @@
-# Data-Visualization-in-R
+# Data Visualization in R
 Basic graphing tutorials using R. These assume no prior programming experience and are written as such. 
 
 ## Current files
