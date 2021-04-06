@@ -45,7 +45,7 @@ plot(x, y,
      ylab = "MPG")
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 Functions like these provide easy ways to visualize your data while you are working with it. But as you can see, they aren't the most visually appealing plots. There are many arguments that could have been passed into each of these to customize them (type ```?plot```, ```?barplot```, or ```?hist``` to see them), but the ggplot2 package, in my opinion, is an easier way to make a production-quality chart. 
 
@@ -72,7 +72,7 @@ If you execute this code you probably notice that nothing happens. This is becau
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ggplot works by using layers to create a graph. This means that once we create our base plot, we add additional features, or layers, to it. Layers include things such as the data points, trend lines, axes, and annotations, to name a few. At this point the computer knows what data we want to use to create a graph, but it doesn't know how we want it displayed. Do we want a bar chart, scatter plot, line graph, or something else? We can tell it how to plot our values by adding a layer to the plot. This is done using a ```+``` after plt. In this case we want a scatter plot, so we will use ```geom_point()``` to add points to the plot. The geom stands for geometric object, and the point is, well a data point.
 
@@ -80,7 +80,7 @@ ggplot works by using layers to create a graph. This means that once we create o
 plt + geom_point()
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 Now things are looking a bit better. But if you call `plt` again you will get the blank graph like before. This is because you have not 'saved' the new graph to `plt`. This is easily done with:
 
@@ -98,7 +98,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 So with visual inspection, it seems that cars with fewer cylinders have lower displacement and get better gas mileage...makes sense. Okay, now lets say we want to see a trend line. we can do this with ```geom_smooth()```. To tell it how to create the line we need to add a ```method =``` argument. This tells the computer which method to use to fit the model. In this case we want to use a linear model, or "lm".
 
@@ -108,7 +108,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 This displays a linear trend line with 95% confidence bands around it. The confidence bands can be changed with the ```level = ``` argument. For example, if you want 99% confidence bands set it to 0.99. If you do not want it at all set it to `FALSE`. The default value is 95%. Now lets say we want to see how much variance in mpg is predicted by disp (English translation: We want an R<sup>2</sup> value on the chart). This is quite easy to do but it requires a few steps. First we actually have to create a linear regression model. This is done with the ```lm()``` function. We first pass in a formula to the function. The equation of a straight line is <span style="font-weight: bold">y = mx + b</span>, so our formula will need to take this form. We can do this as follows:
 
@@ -158,7 +158,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 Here, we gave annotate 4 arguments. The `geom = ` argument specifies the type of geometric object we are adding (in this case text). The x and y arguments specify the position of the annotation on the plot. The `label = ` is the text that we want to report. I set this to the R<sup>2</sup> value in the summary of the linear model we made using  `$` to extract the value from the list. Because this value is quite long, I rounded it to 2 decimal places. This can be changed by changing the 2 to whatever number you like. 
 
@@ -208,7 +208,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 Don't worry about the first line, I was just removing the linear trend line and the R<sup>2</sup> value we already added. The geom_smooth for a quadratic function is largely the same as before, except that we specified the formula. In this case we gave it a second degree polynomial. Lets add the new R<sup>2</sup>:
 
@@ -222,7 +222,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 Technically, you can keep increasing the degree of polynomial up to N - 1 (where N is the number of data points) and you will keep getting a better R2. The problem with this is that you get an equation that is not useful. That is, it predicts the sample data very well but will not predict new data well, and you will often get wild predictions. This is what's known as over fitting. You want the simplest model that accurately fits your data. In this case, a 3<sup>rd</sup> degree polynomial actually fits the best. But for simplicity, we will just leave it as-is. 
 
@@ -245,7 +245,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 
 The `xlab()` and `ylab()` define the names of the x and y labels. The `labs()` allows you to add other labels. Title is the main graph title, and subtitle adds a smaller subtitle under the main title. The caption allows you to add a figure caption, for example the source of the data. Depending on what you are graphing these may or may not be of use, but I wanted to show you they exist.
 
@@ -279,7 +279,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
 
 ## annotate()
 
@@ -315,7 +315,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
 
 In this case I think the scale of the axes looks pretty good. If for some reason we needed to change it we could use the `scale_y_continuous()` and `scale_x_continuous()` functions. While you likely won't need to do this for scientific plots, you can easily change the color of the axis lines or ticks by passing a `color = ` argument to `element_line()` or `element_text()`. Like with the points, these are strings and can be the name of the color (ex. purple) or the hex color. 
 
@@ -337,7 +337,7 @@ plt <- plt +
 plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
 # Summary
 
@@ -420,4 +420,4 @@ final_plt <- ggplot(data = mtcars,
 final_plt
 ```
 
-![](Data-visualization-in-R_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
+![](Scatter-plot_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
