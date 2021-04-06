@@ -1,13 +1,3 @@
----
-title: "Data visualization in R- Scatter plots"
-author: Dr. Chuck Zumbaugh
-date: "Last updated: 02/18/2021"
-output: 
-  html_document:
-    keep_md: true
----
-
-
 In this tutorial we will discuss how to make attractive and effective scatter plots using R. Before we begin, there are a couple of packages that you will need to install. The following code will install them when executed (copy and paste it into the console and hit enter).
 
 ```r
