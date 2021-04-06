@@ -7,64 +7,6 @@ output:
     keep_md: true
 ---
 
-<style type="text/css">
-.header {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.subheading {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.noteheader {
-  font-size: 18;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.equation {
-  font-weight: bold;
-  font-size: 18px;
-  font-family: cambria math;
-}
-
-.note-box {
-  border: 3px;
-  border-color: black;
-  border-style: solid;
-  border-radius: 5pt;
-  width: auto;
-  height: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: #FFFFE0;
-}
-
-.note {
-  font-family: corrier;
-  font-size: 14px;
-  width: auto;
-  height: auto;
-}
-
-.caption {
-  font-size: 20;
-}
-
-.page-separator {
-  position: relative;
-  width: auto;
-  height: 2;
-  border-style: solid;
-  border-width: 2;
-}
-
-.header-center {
-  text-align: center;
-}
-</style>
 
 In this tutorial we will discuss how to make attractive and effective scatter plots using R. Before we begin, there are a couple of packages that you will need to install. The following code will install them when executed (copy and paste it into the console and hit enter).
 
@@ -72,7 +14,7 @@ In this tutorial we will discuss how to make attractive and effective scatter pl
 if (!require(ggplot2)) {install.packages("ggplot2")}
 ```
 
-<span class="header">The example dataset</span>
+# The example dataset
 
 To illustrate how to build a graph, we are going to use the "mtcars" data set that is built into R. This data set contains information such as miles per gallon, number of cylinders, displacement, and other car variables for various vehicles. The first few rows for the data set are shown below for visualization purposes.
 
@@ -91,7 +33,7 @@ head(mtcars)
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
-<span class="header">Base R plots</span>
+# Base R plots
 
 Base R has built-in plot functions that can be used to make simple graphs. These are commonly used for simple visualization  during the cleaning and analysis processes. For example, the ```plot() ``` function will create a scatter plot for the x and y coordinates that are passed (put into the function) to it. We can also define other attributes of the plot such as the title and axis labels. We can add `main = ` inside the plot function to add a title, `xlab = ` to add an x axis label, and `ylab = ` to add a y axis label. 
 
@@ -107,7 +49,7 @@ plot(x, y,
 
 Functions like these provide easy ways to visualize your data while you are working with it. But as you can see, they aren't the most visually appealing plots. There are many arguments that could have been passed into each of these to customize them (type ```?plot```, ```?barplot```, or ```?hist``` to see them), but the ggplot2 package, in my opinion, is an easier way to make a production-quality chart. 
 
-<span class="header">Using ggplot2 to make a scatter plot</span>
+# Using ggplot2 to make a scatter plot
 
 First, lets load the ggplot2 package into memory. Execute the following code:
 
@@ -339,7 +281,7 @@ plt
 
 ![](Data-visualization-in-R_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
 
-<span class="subheading">annotate()</span>
+## annotate()
 
 There's a fair bit going on here, so lets break down `annotate()`. The first 3 arguments are the same as what we used for the R2, except I positioned it higher on the y axis so it was above the R2 value. The label looks complicated, but it is not. Here we are fitting a quadratic function. The equation for a quadratic function is <span class="equation">y = ax<sup>2</sup> + bx + c</span> where a is the coefficient for the quadratic term, b is the coefficient for the linear term, and c is the intercept. If this was a straight line your equation would be of the form <span class="equation">y = mx + b</span>. The paste function concatenates strings. That is, it takes several strings and puts them together into a single string. We form the equation string with it. The first string is the `"y = "`, then we add on the linear and quadratic coefficients. If you remember the summary output from above, the quadratic term is the third coefficient. So we access the list of coefficients in the summary, and take the third element. Then we paste an "x^2" after it. We then access the linear coefficient (the second term) and add it to the equation. Finally, we add the intercept, which is the first coefficient.
 
@@ -349,7 +291,7 @@ There's a fair bit going on here, so lets break down `annotate()`. The first 3 a
 
 </div>
 
-<span class="subheading">theme()</span>
+## theme()
 
 Now let's look at `theme()`. With the `title = ` argument I specify the format of the title. It takes an `element_text()` object (makes sense since it is a text). I want it font size 18, and bolded. `face = ` will specify the font face. You can use bold, italic, plain, or bold.italic. 
 
@@ -359,7 +301,7 @@ The `axis.line = ` will tell the computer to put lines for the x and y axes. Thi
 
 The `panel.background = ` allows you to specify the background for the panel. I don't want one (I personally don't like grid lines unless there is a good reason for them), so it set it to `element_blank()` to say it's blank. 
 
-<span class="subheading">guides()</span>
+## guides()
 
 The `guides()` in this case changes the legend. Obviously, factor(cyl) isn't a very good title for the legend. Someone who doesn't know what we did will likely be confused by it. Our points are grouped by color, so we need to define the legend for color. For this case, all I want to change is the title, so I set the title to "# of cylinders". There are other ways you can customize the legend and you can look them up by typing `?guide_legend` into the console.
 
@@ -377,7 +319,7 @@ plt
 
 In this case I think the scale of the axes looks pretty good. If for some reason we needed to change it we could use the `scale_y_continuous()` and `scale_x_continuous()` functions. While you likely won't need to do this for scientific plots, you can easily change the color of the axis lines or ticks by passing a `color = ` argument to `element_line()` or `element_text()`. Like with the points, these are strings and can be the name of the color (ex. purple) or the hex color. 
 
-<span class="subheading">Grid lines</span>
+## Grid lines
 
 In this example we did not add grid lines to the plot. As I said, in most cases I am not a fan of grid lines, but this is a personal opinion. If you would like to add grid lines you can do so using `panel.grid...`. Here I added grid lines to the major ticks on the y axis using `panel.grid.major.y = `. If you were interested in adding grid lines to minor ticks you can set the `panel.grid.minor.y = ` property. I also set the major grid lines on the x axis to `element_blank()`. If this is not done you will get small breaks in the line at the x axis ticks, as R will place a white line there. You may also want a different background color. You can do this by changing the `fill = ` property in the `panel.background`. Note that if you wish to use grid lines you may need to adjust the y axis position of the equation and R<sup>2</sup> annotations.  
 
@@ -397,13 +339,13 @@ plt
 
 ![](Data-visualization-in-R_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
-<span class="header">Summary</span>
+# Summary
 
 You should now be able to create an attractive scatter plot in R. While at first it may seem like this is a lot of work to get a graph, in practice much of this can be wrapped in functions that allow you to produce similar graphs. For example, if you would like the theme of all graphs to be the same as we did here you can write a function that applies that theme to your graph. Then, you just call the function for each graph on only specify the theme once. This is the idea behind the "Don't Repeat Yourself" principal of software development.  
 
 In this example, we added and saved to plt for each layer. This lends itself well to creating an example like this, but it is inefficient and bad practice to do it when creating plots. Instead, define your plot once and add to it in the declaration using `+` like below.
 
-<span class="subheading">Final code</span> 
+## Final code
 
 
 ```r
