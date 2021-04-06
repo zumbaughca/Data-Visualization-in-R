@@ -14,7 +14,7 @@ In this tutorial we will discuss how to make attractive and effective bar charts
 if (!require(ggplot2)) {install.packages("ggplot2")}
 if (!require(lsmeans)) {install.packages("lsmeans")}
 ```
-# Base R plots""
+# Base R plots
 
 We can make bar charts using the ```barplot()``` function like below. The ```height = ``` argument specifies the height of each bar. In this case the vector of heights contains the values <span style="font-weight: bold">26.7, 19.7, and 15.1"". The ```names.arg =``` argument specifies the labels on the x axis (the category of each of the y values). The length of the names.arg (number of values in it) must match the length of the height or R will raise an exception (in this case the length is 3).
 
@@ -62,7 +62,7 @@ library(lsmeans)
 ## convert old 'lsmeans' objects and scripts to work with 'emmeans'.
 ```
 
-# Data generation""
+# Data generation
 
 Let's consider the data we used above to create a bar chart like before. Generally, you will be making a bar chart after you obtain the results of a statistical analysis. To simulate this, we are going to run an example (the model is clearly misspecified but that's fine for this) analysis on the data. There are 3 categories of cyl in the data: 4, 6, and 8. By default, R will coerce numbers to a numeric type. Because we want to analyze them as a categorical variable we need to convert them to a factor. Below I save the mtcars dataset as `df` and convert cyl to a factor.
 
@@ -190,7 +190,7 @@ mean_summary$lsmean
 
 We have our data, so let's make a graph.
 
-# Using ggplot to make a bar chart""
+# Using ggplot to make a bar chart
 
 The ```ggplot()``` function will initialize a new ggplot object. That is, it will create a new "base" plot that you can then add layers, or attributes to. I will generally assign this object to a variable so that I can call or modify it somewhere else in the script. For example, ```plt <- ggplot()``` will initialize an empty plot and assign it to the variable ```plt```. The plot can then be called by typing ```plt``` into the console and executing it. If you do this, you will get a blank graph. This is because we haven't given it any data to plot. Let's consider the first scatter plot we made where we plotted mpg against displacement in the mtcars data. This can be done in ggplot as follows:
 
@@ -404,7 +404,7 @@ We set `plot.title`, `plot.subtitle`, and `plot.caption` to `element_text()` to 
 
 In most scientific plots you will likely only need the title. But just in case, now you know about a few other features. You also don't want a color palette like this in a real graph. It is preferred by most folks to go with neutral colors (black, grey, and variations of that). Additionally, the colors should mean something if they are not all the same. For example, if you are plotting interactive means you might assign a color to the main effect not on the x axis. For this particular graph, if you are going to use a color it should be the same color for each bar. 
 
-# Summary""
+# Summary
 
 You should now be able to create an attractive bar chart in R. While at first it may seem like this is a lot of work to get a graph, in practice much of this can be wrapped inside functions that allow you to reuse code. For example, if you would like the theme of all graphs to be the same as we did here, you can write a function that applies that theme to your graph. Then, you just call the function for each graph on only specify the theme once. This is the idea behind the "Don't Repeat Yourself" principal of software development. 
 
